@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="5"
+    tools:context=".MainAdminActivity">
+
+    <Button
+        android:id="@+id/btnQLTK"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Quan Ly Tai Khoan" />
+
+    <Button
+        android:id="@+id/btnQLSP"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Quan Ly San Pham" />
+
+    <Button
+        android:id="@+id/btnQLNV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Quan Ly Nhan Vien" />
+    <Button
+        android:id="@+id/btnQLDH"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Quan Ly Don Hang" />
+
+
+</LinearLayout>

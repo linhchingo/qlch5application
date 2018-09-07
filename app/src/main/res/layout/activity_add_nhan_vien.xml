@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNhanVienActivity">
+
+    <EditText
+        android:id="@+id/edtAddMaNV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:hint="Ma Nhan Vien"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtAddTenNV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Ten Nhan Vien"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtAddMaNV"
+        app:layout_constraintStart_toStartOf="@+id/edtAddMaNV"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddMaNV" />
+
+    <EditText
+        android:id="@+id/edtAddEmailNV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Email Nhan Vien"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtAddTenNV"
+        app:layout_constraintStart_toStartOf="@+id/edtAddTenNV"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddTenNV" />
+
+    <Button
+        android:id="@+id/btnAddNhanVien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="@+id/edtAddEmailNV"
+        app:layout_constraintStart_toStartOf="@+id/edtAddEmailNV"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddEmailNV" />
+</android.support.constraint.ConstraintLayout>

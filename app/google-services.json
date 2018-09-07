@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "531477880019",
+    "firebase_url": "https://qlch5application.firebaseio.com",
+    "project_id": "qlch5application",
+    "storage_bucket": "qlch5application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531477880019:android:5e453ed6be590fb1",
+        "android_client_info": {
+          "package_name": "com.lethaqlch.qlch5application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531477880019-6kfdke9hs8bfjp3cf46k7cl0g4ujo39m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lethaqlch.qlch5application",
+            "certificate_hash": "0e660f2c9e67c4e4422f2cadede40c446bf84fa5"
+          }
+        },
+        {
+          "client_id": "531477880019-v1jb03keplobea4att6914872ae13ra8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB8XBdXVvFpVt-OVowEC-wBTrF9D5Wfys"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531477880019-v1jb03keplobea4att6914872ae13ra8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
