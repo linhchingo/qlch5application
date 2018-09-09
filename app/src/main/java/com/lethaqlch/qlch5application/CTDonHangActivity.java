@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,6 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public class CTDonHangActivity extends AppCompatActivity {
     private Spinner spinnerNVTiepNhan;
@@ -32,7 +36,7 @@ public class CTDonHangActivity extends AppCompatActivity {
     private ListView lvSPed;
     private DonHangItem donHang;
     private AdapterListCast adapterListCast;
-    private String mkey;
+    private String mkey,emailNV,emailKH,maNV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +51,44 @@ public class CTDonHangActivity extends AppCompatActivity {
 
 
         init();
+
         final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
         myRef.child("NhanVien").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 NhanVien nhanVien = dataSnapshot.getValue(NhanVien.class);
-                listTenNV.add(nhanVien.getTenNV());
+                listNhanVien.add(nhanVien);
+                listTenNV.add(nhanVien.getMaNV());
                 adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        myRef.child("TaiKhoan").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                TaiKhoan taiKhoan = dataSnapshot.getValue(TaiKhoan.class);
+                if (taiKhoan.getiD().equals(donHang.getiDKhach())){
+                    emailKH = taiKhoan.getEmail();
+                }
             }
 
             @Override
@@ -159,12 +194,22 @@ public class CTDonHangActivity extends AppCompatActivity {
                 if (spinnerNVTiepNhan.getSelectedItem().toString().equals("Chon nhan vien tiep nhan")){
                     Toast.makeText(getApplicationContext(),"vui long chon nguoi tiep nhan",Toast.LENGTH_SHORT).show();
                 }else {
+                    maNV = spinnerNVTiepNhan.getSelectedItem().toString();
+                    Iterator<NhanVien> nhanVienIterator = listNhanVien.iterator();
+                    while(nhanVienIterator.hasNext()){
+                        NhanVien nhanVien = nhanVienIterator.next();
+                        if (nhanVien.getMaNV().equals(maNV)){
+                            emailNV = nhanVien.getEmailNV();
+                        }
+
+                    }
+
                     myRef.child("NhanVien").addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                             NhanVien nhanVien = dataSnapshot.getValue(NhanVien.class);
-                            if (nhanVien.getTenNV().equals(spinnerNVTiepNhan.getSelectedItem().toString())){
-                                myRef.child("DonHang").child(mkey).child("maNV").setValue(nhanVien.getTenNV());
+                            if (nhanVien.getMaNV().equals(spinnerNVTiepNhan.getSelectedItem().toString())){
+                                myRef.child("DonHang").child(mkey).child("maNV").setValue(nhanVien.getMaNV());
                             }
                         }
 
@@ -189,7 +234,37 @@ public class CTDonHangActivity extends AppCompatActivity {
                         }
                     });
 
+                    Log.i("SendMailActivity", "Send Button Clicked.");
+
+                    String fromEmail = "lethaisan191193@gmail.com";
+                    String fromPassword ="heoconngoc";
+                    String toEmails = emailNV+","+emailKH;
+                    List<String> toEmailList = Arrays.asList(toEmails
+                            .split("\\s*,\\s*"));
+                    Log.i("SendMailActivity", "To List: " + toEmailList);
+                    String emailSubject = "Xac Nhan Don Hang"+donHang.getMaDH();
+                    String emailBody = "Ma Don Hang: "+donHang.getMaDH()+"\n"+
+                            "Tai Khoan Mua Hang: "+donHang.getiDKhach()+"\n"+
+                            "Tong Tien: "+donHang.getTongTien()+"\n"+
+                            "Ngay Dat: "+donHang.getNgayDat()+"\n"+
+                            "Gio Dat: "+donHang.getGioDat()+"\n"+
+                            "Nhan Vien Tiep Nhan: "+maNV+"\n"+
+                            spEd(listSPed)
+                            ;
+                    new SendMailTask(CTDonHangActivity.this).execute(fromEmail,
+                            fromPassword, toEmailList, emailSubject, emailBody);
+
+                    btnXacNhanDonHang.setEnabled(false);
+                    tvCTTinhTrang.setText("Da Xac Nhan");
+
                 }
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -215,5 +290,19 @@ public class CTDonHangActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         lvSPed = findViewById(R.id.lvSPed);
         adapterListCast = new AdapterListCast(getApplicationContext(), R.layout.item_cart, listSPed);
+        emailNV = new String();
+        emailKH = new String();
+        maNV = new String();
+    }
+
+    public String spEd(ArrayList<Cart> listCart){
+        StringBuilder stringBuilder = new StringBuilder();
+        Iterator<Cart> cartIterator = listCart.iterator();
+        while (cartIterator.hasNext()){
+            Cart cart= cartIterator.next();
+            String itemCart = "Ma SP: "+cart.getSanPham().getMaSP()+"\t"+"Ten SP: "+cart.getSanPham().getTenSp()+"\t"+"Don Gia: "+cart.getSanPham().getGiaSp()+"\t"+"So luong mua: "+cart.getSoLuongOrder()+"\n";
+            stringBuilder.append(itemCart);
+        }
+        return stringBuilder.toString();
     }
 }

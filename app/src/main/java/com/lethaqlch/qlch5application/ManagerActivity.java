@@ -48,35 +48,29 @@ public class ManagerActivity extends AppCompatActivity {
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 DonHangItem donHang = dataSnapshot.getValue(DonHangItem.class);
-                if (donHang.getMaNV().equals("null")) {
-                    int index = 0;
-                    String keyChange = dataSnapshot.getKey();
-                    for (int i = 0; i < keyDHChuacof.size(); i++) {
-                        if (keyChange.equals(keyDHChuacof.get(i))) {
-                            index = i;
-                        }
+                String keyChange = dataSnapshot.getKey();
+                int index = 0;
+                for (int i = 0; i < keyDHChuacof.size(); i++) {
+                    if (keyChange.equals(keyDHChuacof.get(i))) {
+                        index = i;
                     }
+                }
+                if (donHang.getMaNV().equals("null")) {
+
+
+
                     donHangItemArrayListChuaConfirm.set(index, donHang);
                     adapterListDonHangChuaConfirm.notifyDataSetChanged();
-
-
+                }else {
+                    keyDHChuacof.remove(index);
+                    donHangItemArrayListChuaConfirm.remove(index);
+                    adapterListDonHangChuaConfirm.notifyDataSetChanged();
                 }
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                DonHangItem donHang = dataSnapshot.getValue(DonHangItem.class);
-                if (donHang.getMaNV().equals("null")) {
-                    String keyDel = dataSnapshot.getKey();
-                    int index = 0;
-                    for (int i = 0; i < keyDHChuacof.size(); i++) {
-                        if (keyDel.equals(keyDHChuacof.get(i))) {
-                            index = i;
-                        }
-                    }
-                    donHangItemArrayListChuaConfirm.remove(index);
-                    adapterListDonHangChuaConfirm.notifyDataSetChanged();
-                }
+
 
             }
 
