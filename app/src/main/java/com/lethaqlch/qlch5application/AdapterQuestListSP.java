@@ -15,6 +15,7 @@ public class AdapterQuestListSP extends RecyclerView.Adapter<AdapterQuestListSP.
     public interface OnItemClickListen {
         void click(SanPham sanPham);
     }
+
     ArrayList<SanPham> arrayList;
     Context context;
     OnItemClickListen onItemClickListen;
@@ -29,7 +30,7 @@ public class AdapterQuestListSP extends RecyclerView.Adapter<AdapterQuestListSP.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.item_sp_quest,parent,false);
+        View itemView = inflater.inflate(R.layout.item_sp_quest, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -52,9 +53,10 @@ public class AdapterQuestListSP extends RecyclerView.Adapter<AdapterQuestListSP.
         return arrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgItemSPQuest;
         TextView tvItemTenSPQuest;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgItemSPQuest = itemView.findViewById(R.id.imgItemSPQuest);

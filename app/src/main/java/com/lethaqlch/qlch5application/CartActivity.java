@@ -179,7 +179,7 @@ public class CartActivity extends AppCompatActivity {
 
         tongTien = 0;
         calendarNow = Calendar.getInstance();
-        simpleDateFormat = new SimpleDateFormat("dd/MM/YYYY,HH:mm:ss");
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy,HH:mm:ss");
         arraylistOrder = new ArrayList<>();
         arrListDonHang = new ArrayList<>();
 

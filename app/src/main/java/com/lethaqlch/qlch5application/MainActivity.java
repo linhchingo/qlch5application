@@ -105,6 +105,7 @@ public class MainActivity extends BaseActivity {
 
         recyclerViewSPQuest = findViewById(R.id.recyclerViewListSP);
         recyclerViewSPQuest.setHasFixedSize(true);
+        recyclerViewSPQuest.setNestedScrollingEnabled(false);
         GridLayoutManager linearLayoutManager = new GridLayoutManager(this, 2);
 
         recyclerViewSPQuest.setLayoutManager(linearLayoutManager);
