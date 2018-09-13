@@ -243,13 +243,94 @@ public class CTDonHangActivity extends AppCompatActivity {
                             .split("\\s*,\\s*"));
                     Log.i("SendMailActivity", "To List: " + toEmailList);
                     String emailSubject = "Xac Nhan Don Hang"+donHang.getMaDH();
-                    String emailBody = "Ma Don Hang: "+donHang.getMaDH()+"\n"+
-                            "Tai Khoan Mua Hang: "+donHang.getiDKhach()+"\n"+
-                            "Tong Tien: "+donHang.getTongTien()+"\n"+
-                            "Ngay Dat: "+donHang.getNgayDat()+"\n"+
-                            "Gio Dat: "+donHang.getGioDat()+"\n"+
-                            "Nhan Vien Tiep Nhan: "+maNV+"\n"+
-                            spEd(listSPed)
+                    String emailBody = "<!DOCTYPE html>" +
+                            "<html lang=\"en\">" +
+                            "<head>" +
+                            "    <meta charset=\"UTF-8\">" +
+                            "    <title>Title</title>" +
+                            "</head>" +
+                            "" +
+                            "<body>" +
+                            "<table style=\"border-spacing: 0px;\">" +
+                            "    <tbody>" +
+                            "    <tr>" +
+                            "        <td style=\"padding: 5px;\">Ma Don Hang:" +
+                            "        </td>" +
+                            "        <td style=\"padding: 5px;\">"+donHang.getMaDH()+
+                            "        </td>" +
+                            "    </tr>" +
+                            "    <tr>" +
+                            "        <td style=\"padding: 5px;\">Tai Khoan Mua Hang:" +
+                            "        </td>" +
+                            "        <td style=\"padding: 5px;\">"+donHang.getiDKhach()+
+                            "        </td>" +
+                            "    </tr>" +
+                            "    <tr>" +
+                            "        <td style=\"padding: 5px;\">Ngay Dat:" +
+                            "        </td>" +
+                            "        <td style=\"padding: 5px;\">"+donHang.getNgayDat()+
+                            "        </td>" +
+                            "    </tr>" +
+                            "    <tr>" +
+                            "        <td style=\"padding: 5px;\">Gio Dat:" +
+                            "        </td>" +
+                            "        <td style=\"padding: 5px;\">"+donHang.getGioDat()+
+                            "        </td>" +
+                            "    </tr>" +
+                            "    <tr>" +
+                            "        <td style=\"padding: 5px;\">Nhan Vien Tiep Nhan:" +
+                            "        </td>" +
+                            "        <td style=\"padding: 5px;\">"+maNV+
+                            "        </td>" +
+                            "    </tr>" +
+                            "    </tbody>" +
+                            "</table>" +
+
+
+
+
+
+
+                            "<table style=\"border-spacing: 0px;\">" +
+                            "    <tbody>" +
+                            spEd(listSPed)+
+                            "    <tr>" +
+                            "        <td style=\" border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">" +
+                            "            &nbsp;" +
+                            "        </td>" +
+                            "        <td style=\"border-bottom: 1px solid #000;margin: 0px; padding: 5px 10px;\">" +
+                            "            &nbsp;" +
+                            "        </td>" +
+                            "        <td style=\"border-bottom: 1px solid #000; margin: 0px;padding: 5px 10px;\">" +
+                            "            Tong tien: " +donHang.getTongTien()+
+                            "        </td>" +
+                            "        <td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">&nbsp;</td>" +
+                            "    </tr>" +
+                            "    </tbody>" +
+                            "</table>" +
+                            "</body>" +
+                            "</html>"
+                            /*"<p> Ma Don Hang: "+donHang.getMaDH()+"</p>"+
+                            "<p>Tai Khoan Mua Hang: "+donHang.getiDKhach()+"</p>"+
+                            "<p>Tong Tien: "+donHang.getTongTien()+"</p>"+
+                            "<p>Ngay Dat: "+donHang.getNgayDat()+"</p>"+
+                            "<p>Gio Dat: "+donHang.getGioDat()+"</p>"+
+                            "<p>Nhan Vien Tiep Nhan: "+maNV+"</p>"+
+                            "<table class=\"table-m\">"+spEd(listSPed)+"</table>"+
+                            "<style>\n" +
+                            "    .table-m tr td {\n" +
+                            "        border-bottom: 1px solid #000;\n" +
+                            "        margin: 0px;\n" +
+                            "        padding: 5px 10px;\n" +
+                            "    }\n" +
+                            "    .table-m {\n" +
+                            "        border-spacing: 0px;\n" +
+                            "    }\n" +
+                            "    .table-c tr td {\n" +
+                            "        padding: 5px;\n" +
+                            "    }\n" +
+                            "</style>"*/
+
                             ;
                     new SendMailTask(CTDonHangActivity.this).execute(fromEmail,
                             fromPassword, toEmailList, emailSubject, emailBody);
@@ -297,12 +378,52 @@ public class CTDonHangActivity extends AppCompatActivity {
 
     public String spEd(ArrayList<Cart> listCart){
         StringBuilder stringBuilder = new StringBuilder();
+               stringBuilder.append(
+                       "<tr>" +
+                               "<td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">Ma SP</td>" +
+                               "<td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">Ten SP</td>" +
+                               "<td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">Don Gia</td>" +
+                               "<td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">So luong mua</td>" +
+                               "</tr>");
         Iterator<Cart> cartIterator = listCart.iterator();
         while (cartIterator.hasNext()){
             Cart cart= cartIterator.next();
-            String itemCart = "Ma SP: "+cart.getSanPham().getMaSP()+"\t"+"Ten SP: "+cart.getSanPham().getTenSp()+"\t"+"Don Gia: "+cart.getSanPham().getGiaSp()+"\t"+"So luong mua: "+cart.getSoLuongOrder()+"\n";
+            String itemCart = " <tr>" +
+                    "<td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">"+cart.getSanPham().getMaSP()+"</td>"+
+                    "<td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">"+cart.getSanPham().getTenSp()+"</td>"+
+                    "<td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">"+cart.getSanPham().getGiaSp()+"</td>"+
+                    "<td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">"+cart.getSoLuongOrder()+"</td>" +
+                    "</tr>";
             stringBuilder.append(itemCart);
         }
         return stringBuilder.toString();
     }
+ /*"    <tr>" +
+         "        <td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">" +
+         "            Ma SP: SP7" +
+         "        </td>" +
+         "        <td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">" +
+         "            Ten SP: Taplet mini" +
+         "        </td>" +
+         "        <td style=\"border-bottom: 1px solid #000;margin: 0px; padding: 5px 10px;\">" +
+         "            Don Gia: 500" +
+         "        </td>" +
+         "        <td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">" +
+         "            So luong mua: 1" +
+         "        </td>" +
+         "    </tr>" +
+         "    <tr>" +
+         "        <td style=\" border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">" +
+         "            &nbsp;" +
+         "        </td>" +
+         "        <td style=\"border-bottom: 1px solid #000;margin: 0px; padding: 5px 10px;\">" +
+         "            &nbsp;" +
+         "        </td>" +
+         "        <td style=\"border-bottom: 1px solid #000; margin: 0px;padding: 5px 10px;\">" +
+         "            Tong tien: 500" +
+         "        </td>" +
+         "        <td style=\"border-bottom: 1px solid #000;margin: 0px;padding: 5px 10px;\">&nbsp;</td>" +
+         "    </tr>" +
+
+*/
 }
