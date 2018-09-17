@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class AdapterListAccount extends BaseAdapter {
+public class  AdapterListAccount extends BaseAdapter {
     private Context context;
     private int layout;
     private List<TaiKhoan> taiKhoanList;

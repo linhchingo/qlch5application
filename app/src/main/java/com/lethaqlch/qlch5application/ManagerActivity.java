@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -24,6 +25,7 @@ public class ManagerActivity extends AppCompatActivity {
     private ArrayList<DonHangItem> donHangItemArrayListChuaConfirm;
     private AdapterListDonHang adapterListDonHangChuaConfirm;
     private ArrayList<String> keyDHChuacof;
+    private Button btnToDonHanged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +101,23 @@ public class ManagerActivity extends AppCompatActivity {
 
             }
         });
+
+
+        btnToDonHanged.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),QlDonHangedActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
     private void init() {
         donHangItemArrayListChuaConfirm = new ArrayList<>();
         lvDonHangChuaConfirm = findViewById(R.id.lvDonHangChuaConfirm);
         keyDHChuacof = new ArrayList<>();
+        btnToDonHanged = findViewById(R.id.btnToDonHanged);
     }
 
     @Override

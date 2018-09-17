@@ -31,7 +31,8 @@
         <activity android:name=".SanPhamChiTietQuestActivity" />
         <activity android:name=".QLNhanVienActivity" />
         <activity android:name=".AddNhanVienActivity" />
-        <activity android:name=".CTDonHangActivity"></activity>
+        <activity android:name=".CTDonHangActivity" />
+        <activity android:name=".QlDonHangedActivity"></activity>
     </application>
 
 </manifest>
