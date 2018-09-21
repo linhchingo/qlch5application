@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class CreateAccoutActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText edtCreateID, edtCreatePass, edtCreateEmail;
+    private EditText edtCreateID, edtCreatePass, edtCreateEmail,edtCreateDiaChi;
     private CheckBox checkBoxAdmin;
     private Button buttonCreateAccount, buttonBackLogin;
     private WriteReadFireBase writeReadFireBase;
@@ -76,6 +76,7 @@ public class CreateAccoutActivity extends AppCompatActivity implements View.OnCl
     private void anhXa() {
         edtCreateID = findViewById(R.id.edtCreateID);
         edtCreatePass = findViewById(R.id.edtCreatePass);
+        edtCreateDiaChi = findViewById(R.id.edtCreateDiaChi);
         checkBoxAdmin = findViewById(R.id.checkBoxAdmin);
         buttonCreateAccount = findViewById(R.id.btnCreateAccout);
         buttonBackLogin = findViewById(R.id.btnBackLogin);
@@ -114,7 +115,7 @@ public class CreateAccoutActivity extends AppCompatActivity implements View.OnCl
                     }
 
                     writeReadFireBase = new WriteReadFireBase(CreateAccoutActivity.this);
-                    TaiKhoan taiKhoan = new TaiKhoan(edtCreateID.getText().toString(), edtCreatePass.getText().toString(), edtCreateEmail.getText().toString(), index);
+                    TaiKhoan taiKhoan = new TaiKhoan(edtCreateID.getText().toString(), edtCreatePass.getText().toString(), edtCreateEmail.getText().toString(),edtCreateDiaChi.getText().toString(), index);
                     writeReadFireBase.writeData("TaiKhoan", taiKhoan);
                     backLogin();
 

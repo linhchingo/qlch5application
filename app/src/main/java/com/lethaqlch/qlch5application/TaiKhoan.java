@@ -4,17 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class TaiKhoan extends Object implements Parcelable {
-    String iD, pass, email;
+    String iD, pass, email, diaChi;
     int quyen;
 
     public TaiKhoan() {
-    }
-
-    public TaiKhoan(String iD, String pass, String email, int quyen) {
-        this.iD = iD;
-        this.pass = pass;
-        this.email = email;
-        this.quyen = quyen;
     }
 
     public String getiD() {
@@ -41,11 +34,28 @@ public class TaiKhoan extends Object implements Parcelable {
         this.email = email;
     }
 
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
     public int getQuyen() {
         return quyen;
     }
 
     public void setQuyen(int quyen) {
+        this.quyen = quyen;
+    }
+
+    public TaiKhoan(String iD, String pass, String email, String diaChi, int quyen) {
+
+        this.iD = iD;
+        this.pass = pass;
+        this.email = email;
+        this.diaChi = diaChi;
         this.quyen = quyen;
     }
 
@@ -59,6 +69,7 @@ public class TaiKhoan extends Object implements Parcelable {
         dest.writeString(this.iD);
         dest.writeString(this.pass);
         dest.writeString(this.email);
+        dest.writeString(this.diaChi);
         dest.writeInt(this.quyen);
     }
 
@@ -66,10 +77,11 @@ public class TaiKhoan extends Object implements Parcelable {
         this.iD = in.readString();
         this.pass = in.readString();
         this.email = in.readString();
+        this.diaChi = in.readString();
         this.quyen = in.readInt();
     }
 
-    public static final Parcelable.Creator<TaiKhoan> CREATOR = new Parcelable.Creator<TaiKhoan>() {
+    public static final Creator<TaiKhoan> CREATOR = new Creator<TaiKhoan>() {
         @Override
         public TaiKhoan createFromParcel(Parcel source) {
             return new TaiKhoan(source);

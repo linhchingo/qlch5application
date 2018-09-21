@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="5"
+    android:weightSum="6"
     tools:context=".MainAdminActivity">
 
     <Button
@@ -27,6 +27,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Quan Ly Nhan Vien" />
+
     <Button
         android:id="@+id/btnQLDH"
         android:layout_width="match_parent"
@@ -39,8 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Chart
-" />
-
+        android:text="Chart" />
+    <Button
+        android:id="@+id/btnChartLocation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Chart Location" />
 
 </LinearLayout>

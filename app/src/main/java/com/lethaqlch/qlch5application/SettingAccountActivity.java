@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SettingAccountActivity extends AppCompatActivity implements View.OnClickListener {
     private TaiKhoan taiKhoan;
-    private EditText editTextSTIDACC, editTextSTEmail, editTextSTPass;
+    private EditText editTextSTIDACC, editTextSTEmail, editTextSTPass,editTextSTDiaChi;
     private CheckBox checkBoxSTQuyen;
     private Button btnUpdate, btnCancel;
     private String mkey;
@@ -40,6 +40,7 @@ public class SettingAccountActivity extends AppCompatActivity implements View.On
         editTextSTIDACC.setText(taiKhoan.getiD());
         editTextSTEmail.setText(taiKhoan.getEmail());
         editTextSTPass.setText(taiKhoan.getPass());
+        editTextSTDiaChi.setText(taiKhoan.getDiaChi());
         editTextSTIDACC.setEnabled(false);
         switch (taiKhoan.getQuyen()) {
             case 1:
@@ -60,6 +61,7 @@ public class SettingAccountActivity extends AppCompatActivity implements View.On
         editTextSTEmail = findViewById(R.id.editTextSTEmail);
         editTextSTPass = findViewById(R.id.editTextSTPass);
         checkBoxSTQuyen = findViewById(R.id.checkBoxSTQuyen);
+        editTextSTDiaChi = findViewById(R.id.editTextSTDiaChi);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnCancel = findViewById(R.id.btnCancel);
     }
@@ -72,7 +74,7 @@ public class SettingAccountActivity extends AppCompatActivity implements View.On
                 if (checkBoxSTQuyen.isChecked()) {
                     checkBoxchecked = 2;
                 }
-                taiKhoan = new TaiKhoan(editTextSTIDACC.getText().toString(), editTextSTPass.getText().toString(), editTextSTEmail.getText().toString(), checkBoxchecked);
+                taiKhoan = new TaiKhoan(editTextSTIDACC.getText().toString(), editTextSTPass.getText().toString(), editTextSTEmail.getText().toString(),editTextSTDiaChi.getText().toString(), checkBoxchecked);
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                 myRef.child("TaiKhoan").child(mkey).setValue(taiKhoan, new DatabaseReference.CompletionListener() {
                     @Override

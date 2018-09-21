@@ -19,9 +19,34 @@ import com.lethaqlch.qlch5application.base.BaseActivity;
 import java.util.ArrayList;
 
 public class MainAdminActivity extends BaseActivity implements View.OnClickListener, Parcelable {
-    private Button btnQLTK, btnQLSP,btnQLNV,btnQLDH,btnChart;
+    public static final Creator<MainAdminActivity> CREATOR = new Creator<MainAdminActivity>() {
+        @Override
+        public MainAdminActivity createFromParcel(Parcel source) {
+            return new MainAdminActivity(source);
+        }
+
+        @Override
+        public MainAdminActivity[] newArray(int size) {
+            return new MainAdminActivity[size];
+        }
+    };
+    private Button btnQLTK, btnQLSP, btnQLNV, btnQLDH, btnChart, btnChartLocation;
     private ArrayList<DonHangItem> donHangItemArrayList;
     private ArrayList<String> dateArr;
+    private ArrayList<TaiKhoan> listTaiKhoan;
+
+    public MainAdminActivity() {
+    }
+
+
+    protected MainAdminActivity(Parcel in) {
+
+        this.btnChart = in.readParcelable(Button.class.getClassLoader());
+        this.btnChartLocation = in.readParcelable(Button.class.getClassLoader());
+        this.donHangItemArrayList = in.createTypedArrayList(DonHangItem.CREATOR);
+        this.dateArr = in.createStringArrayList();
+        this.listTaiKhoan = in.createTypedArrayList(TaiKhoan.CREATOR);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +57,17 @@ public class MainAdminActivity extends BaseActivity implements View.OnClickListe
         btnQLNV = findViewById(R.id.btnQLNV);
         btnQLDH = findViewById(R.id.btnQLDH);
         btnChart = findViewById(R.id.btnChart);
+        btnChartLocation = findViewById(R.id.btnChartLocation);
         btnQLTK.setOnClickListener(this);
         btnQLSP.setOnClickListener(this);
         btnQLNV.setOnClickListener(this);
         btnQLDH.setOnClickListener(this);
         btnChart.setOnClickListener(this);
+        btnChartLocation.setOnClickListener(this);
 
         donHangItemArrayList = new ArrayList<>();
         dateArr = new ArrayList<>();
+        listTaiKhoan = new ArrayList<>();
 
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
@@ -50,6 +78,34 @@ public class MainAdminActivity extends BaseActivity implements View.OnClickListe
                 donHangItemArrayList.add(donHangItem);
                 String[] mounthDH = donHangItem.getNgayDat().split("/");
                 dateArr.add(mounthDH[1]);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        myRef.child("TaiKhoan").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                TaiKhoan taiKhoan = dataSnapshot.getValue(TaiKhoan.class);
+                listTaiKhoan.add(taiKhoan);
             }
 
             @Override
@@ -97,15 +153,19 @@ public class MainAdminActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.btnChart:
                 Intent intentChart = new Intent(MainAdminActivity.this, ChartActivity.class);
-                intentChart.putParcelableArrayListExtra("listDonHang",donHangItemArrayList);
-                intentChart.putStringArrayListExtra("monthDH",dateArr);
+                intentChart.putParcelableArrayListExtra("listDonHang", donHangItemArrayList);
+                intentChart.putStringArrayListExtra("monthDH", dateArr);
                 startActivity(intentChart);
+                break;
+            case R.id.btnChartLocation:
+                Intent intentChartLocation = new Intent(MainAdminActivity.this, ChartLocationActivity.class);
+                intentChartLocation.putParcelableArrayListExtra("listAccount", listTaiKhoan);
+                startActivity(intentChartLocation);
                 break;
         }
 
 
     }
-
 
     @Override
     public int describeContents() {
@@ -114,29 +174,8 @@ public class MainAdminActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
         dest.writeTypedList(this.donHangItemArrayList);
         dest.writeStringList(this.dateArr);
+        dest.writeTypedList(this.listTaiKhoan);
     }
-
-    public MainAdminActivity() {
-    }
-
-    protected MainAdminActivity(Parcel in) {
-
-        this.donHangItemArrayList = in.createTypedArrayList(DonHangItem.CREATOR);
-        this.dateArr = in.createStringArrayList();
-    }
-
-    public static final Parcelable.Creator<MainAdminActivity> CREATOR = new Parcelable.Creator<MainAdminActivity>() {
-        @Override
-        public MainAdminActivity createFromParcel(Parcel source) {
-            return new MainAdminActivity(source);
-        }
-
-        @Override
-        public MainAdminActivity[] newArray(int size) {
-            return new MainAdminActivity[size];
-        }
-    };
 }
