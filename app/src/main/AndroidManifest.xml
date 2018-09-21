@@ -32,7 +32,8 @@
         <activity android:name=".QLNhanVienActivity" />
         <activity android:name=".AddNhanVienActivity" />
         <activity android:name=".CTDonHangActivity" />
-        <activity android:name=".QlDonHangedActivity"></activity>
+        <activity android:name=".QlDonHangedActivity" />
+        <activity android:name=".ChartActivity"></activity>
     </application>
 
 </manifest>
