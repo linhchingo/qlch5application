@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="6"
+    android:weightSum="7"
     tools:context=".MainAdminActivity">
 
     <Button
@@ -47,5 +47,11 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Chart Location" />
+    <Button
+        android:id="@+id/btnChartLine"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Line Chart" />
 
 </LinearLayout>

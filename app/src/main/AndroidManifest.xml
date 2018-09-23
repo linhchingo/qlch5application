@@ -34,7 +34,8 @@
         <activity android:name=".CTDonHangActivity" />
         <activity android:name=".QlDonHangedActivity" />
         <activity android:name=".ChartActivity" />
-        <activity android:name=".ChartLocationActivity"></activity>
+        <activity android:name=".ChartLocationActivity" />
+        <activity android:name=".ChartLineActivity"></activity>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -75,7 +76,7 @@ public class ChartActivity extends AppCompatActivity {
             mChart.getData().notifyDataChanged();
             mChart.notifyDataSetChanged();
         } else {
-            set1 = new BarDataSet(yVals1, "The year 2017");
+            set1 = new BarDataSet(yVals1, "Doanh thu");
 
             set1.setDrawIcons(false);
 
@@ -99,6 +100,9 @@ public class ChartActivity extends AppCompatActivity {
 
             mChart.setData(data);
             mChart.animateY(3000);
+            Description description = new Description();
+            description.setText("Bieu do doanh thu theo thang");
+            mChart.setDescription(description);
         }
 
 
@@ -138,55 +142,4 @@ public class ChartActivity extends AppCompatActivity {
 
     }
 
-  /*  private void setData(int count, float range) {
-
-        float start = 1f;
-
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-
-
-        for (int i = (int) start; i < start + count + 1; i++) {
-            float mult = (range + 1);
-            float val = (float) (Math.random() * mult);
-
-
-            yVals1.add(new BarEntry(i, val));
-
-        }
-
-        BarDataSet set1;
-
-        if (mChart.getData() != null &&
-                mChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) mChart.getData().getDataSetByIndex(0);
-            set1.setValues(yVals1);
-            mChart.getData().notifyDataChanged();
-            mChart.notifyDataSetChanged();
-        } else {
-            set1 = new BarDataSet(yVals1, "The year 2017");
-
-            set1.setDrawIcons(false);
-
-            ArrayList<Integer> colors = new ArrayList<>();
-            colors.add(Color.GREEN);
-            colors.add(Color.BLUE);
-            colors.add(Color.RED);
-
-            set1.setColors(colors);
-
-
-            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-            dataSets.add(set1);
-
-
-            BarData data = new BarData(dataSets);
-            data.setValueTextSize(10f);
-
-            data.setBarWidth(0.9f);
-
-
-            mChart.setData(data);
-            mChart.animateY(3000);
-        }
-    }*/
 }
